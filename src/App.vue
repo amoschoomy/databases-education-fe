@@ -1,6 +1,7 @@
 <script setup>
 import { VApp, VAppBar, VAppBarNavIcon, VToolbarTitle, VBtn, VIcon } from 'vuetify/components'
 import SearchBar from './components/SearchBar/SearchBar.vue'
+import UploadMP3 from './components/UploadMP3/UploadMP3.vue'
 </script>
 
 <template>
@@ -21,8 +22,11 @@ import SearchBar from './components/SearchBar/SearchBar.vue'
         <v-col cols="12" sm="4" class="text-left left-column">
         </v-col>
         <v-col cols="12" sm="4" class="text-center center-column">
-        <SearchBar />
-
+          <v-row no-gutters>
+            <SearchBar />
+            <v-col cols="12" class="my-3">Or upload a video</v-col>
+            <UploadMP3 />
+          </v-row>
         </v-col>
         <v-col cols="12" sm="4" class="text-center right-column">
         </v-col>
