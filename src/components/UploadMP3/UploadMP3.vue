@@ -1,14 +1,50 @@
 <template>
-    <v-file-input prepend-icon="" label="Upload MP3" accept="audio/mp3" @change="onFileChange"></v-file-input>
+  <v-container>
+    <v-row>
+      <v-col>
+        <v-file-input
+          prepend-icon=""
+          label="Upload MP3"
+          accept="audio/mp3, audio/wav, audio/webm"
+          @change="onFileChange"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col>
+        <v-btn color="primary" @click="confirmUpload" :disabled="!selectedFile">Confirm Upload</v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
-  export default {
-    name: 'SearchBar',
-    methods: {
-      onFileChange() {
-        alert('Search bar clicked!');
-      },
+import { uploadAudioFile } from './endpoint';
+
+export default {
+  name: 'SearchBar',
+  data() {
+    return {
+      selectedFile: null,
+    };
+  },
+  methods: {
+    onFileChange(event) {
+      console.log('File input changed');
+      this.selectedFile = event.target.files[0];
     },
-  };
-  </script>
+    async confirmUpload() {
+      if (!this.selectedFile) return;
+
+      const endpointURL = 'http://127.0.0.1:8000/summarise-audio/';
+
+      try {
+        const jsonResponse = await uploadAudioFile(this.selectedFile, endpointURL);
+        console.log(jsonResponse);
+      } catch (error) {
+        console.error('Error uploading file:', error);
+      }
+    },
+  },
+};
+</script>
