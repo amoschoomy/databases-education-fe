@@ -22,14 +22,14 @@
 import { uploadAudioFile } from './endpoint';
 
 export default {
-  name: 'SearchBar',
+  name: 'UploadMP3',
   data() {
     return {
       selectedFile: null,
     };
   },
   methods: {
-    onFileChange(event) {
+    onFileChange(event: { target: { files: null[]; }; }) {
       console.log('File input changed');
       this.selectedFile = event.target.files[0];
     },
@@ -40,6 +40,7 @@ export default {
 
       try {
         const jsonResponse = await uploadAudioFile(this.selectedFile, endpointURL);
+        this.$router.push('./result')
         console.log(jsonResponse);
       } catch (error) {
         console.error('Error uploading file:', error);
