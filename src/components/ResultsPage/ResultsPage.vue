@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Result Page</h1>
-    <pre>{{ result }}</pre>
+    <div v-text="resultData"></div>
   </div>
 </template>
 
@@ -9,8 +9,10 @@
 import { defineComponent } from 'vue';
 
 export default defineComponent({
-  props: {
-    result: Object,
+  data() {
+    return {
+      resultData: this.$route.query.jsonResponse,
+    };
   },
 });
 </script>

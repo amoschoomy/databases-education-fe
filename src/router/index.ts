@@ -15,7 +15,7 @@ const routes = [
     path: '/result',
     name: 'ResultPage',
     component: ResultsPage,
-    props: { result: { test: 'Test data' } },
+    props: (route: { query: { data: any; }; }) => ({ resultData: route.query.data })
 
   },
   {

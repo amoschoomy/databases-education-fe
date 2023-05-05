@@ -40,7 +40,7 @@ export default {
 
       try {
         const jsonResponse = await uploadAudioFile(this.selectedFile, endpointURL);
-        this.$router.push('./result')
+        this.$router.push({ name: 'ResultPage', query: { jsonResponse: jsonResponse } });
         console.log(jsonResponse);
       } catch (error) {
         console.error('Error uploading file:', error);
