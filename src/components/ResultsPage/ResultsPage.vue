@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Result Page</h1>
+    <h1>Summary</h1>
     <div v-text="resultData"></div>
   </div>
 </template>
