@@ -2,6 +2,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import ResultsPage from '../components/ResultsPage/ResultsPage.vue';
 import NotFound from '../components/NotFound/NotFound.vue';
+import Profile from '../components/Profile/Profile.vue';
 
 import Home from '../Home.vue'
 const routes = [
@@ -9,6 +10,12 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home
+  },
+
+  {
+    path: '/profile',
+    name: 'Profile',
+    component: Profile, 
   },
 
   {

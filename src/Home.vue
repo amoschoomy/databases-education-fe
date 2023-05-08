@@ -2,6 +2,8 @@
 import { VApp, VAppBar, VAppBarNavIcon, VToolbarTitle, VBtn, VIcon } from 'vuetify/components'
 import SearchBar from './components/SearchBar/SearchBar.vue'
 import UploadMP3 from './components/UploadMP3/UploadMP3.vue'
+import Login from './components/Login/Login.vue'
+import Logout from './components/Logout/Logout.vue'
 </script>
 
 <template>
@@ -10,12 +12,12 @@ import UploadMP3 from './components/UploadMP3/UploadMP3.vue'
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
       <v-toolbar-title>Academic Article and Video Summary</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text>
-        <v-icon left>mdi-login</v-icon>Login
+
+      <Login />
+      <v-btn @click="goToProfile" text>
+        <v-icon left>mdi-account</v-icon>Profile
       </v-btn>
-      <v-btn text>
-        <v-icon left>mdi-account-plus</v-icon>Sign Up
-      </v-btn>
+
     </v-app-bar>
     <v-container fluid fill-height class="full-height">
       <v-row no-gutters class="full-height">
@@ -33,13 +35,18 @@ import UploadMP3 from './components/UploadMP3/UploadMP3.vue'
       </v-row>
     </v-container>
   </v-app>
-  </template>
+</template>
   
-  <script lang="ts">
-  export default {
-    name: 'HomePage',
-  };
-  </script>
+<script lang="ts">
+export default {
+  name: 'HomePage',
+  methods: {
+    goToProfile() {
+      this.$router.push({ path: '/profile' });
+    },
+  },
+};
+</script>
 <style scoped>
 .full-height {
   height: calc(100vh - 64px);
