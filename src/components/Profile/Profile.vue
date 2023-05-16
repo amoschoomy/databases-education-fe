@@ -9,8 +9,10 @@
         <p>First Name: {{ user.given_name }}</p>
         <p>Last Name: {{ user.family_name }}</p>
         <p>Email: {{ user.email }}</p>
+        <p>UID: {{ user.sub }}</p>
       </pre>
-    <button>History</button>
+      <button>History</button>
+      <button>Delete Account</button>
     </div>
   </div>
 </template>
@@ -20,32 +22,45 @@
   color: black;
 }
 </style>
-  <script lang="ts">
-    // Composition API
-    import { useAuth0 } from '@auth0/auth0-vue';
-  
-    export default {
-      setup() {
-        const auth0 = useAuth0();
-  
-        return {
-          login: () => auth0.loginWithRedirect(),
-          user: auth0.user,
-          isAuthenticated: auth0.isAuthenticated,
-          isLoading: auth0.isLoading,
-        };
-      },
-      data() {
-        return {
-          user: this.$auth0.user,
-          isAuthenticated: this.$auth0.isAuthenticated,
-          isLoading: this.$auth0.isLoading,
-        };
-      },
-      methods: {
-        login() {
-          this.$auth0.loginWithRedirect();
-        }
-      }
+<script lang="ts">
+// Composition API
+import { useAuth0 } from '@auth0/auth0-vue';
+import axios from 'axios'
+
+export default {
+  setup() {
+    const auth0 = useAuth0();
+
+    return {
+      login: () => auth0.loginWithRedirect(),
+      user: auth0.user,
+      isAuthenticated: auth0.isAuthenticated,
+      isLoading: auth0.isLoading,
     };
-  </script>
+  },
+  data() {
+    return {
+      user: this.$auth0.user,
+      isAuthenticated: this.$auth0.isAuthenticated,
+      isLoading: this.$auth0.isLoading,
+    };
+  },
+  methods: {
+    login() {
+      this.$auth0.loginWithRedirect();
+    }
+    ,
+    async deleteAccount() {
+      // call the endpoint to delete the account from the database
+      try {
+        const response = await axios.delete('/api/deleteAccount', { data: { userId: this.user.sub } });
+        if (response.status === 200) {
+          // handle successful deletion
+        }
+      } catch (error) {
+        // handle error
+      }
+    }
+  }
+};
+</script>
