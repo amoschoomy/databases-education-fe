@@ -11,7 +11,7 @@
         <p>Email: {{ user.email }}</p>
         <p>UID: {{ user.sub }}</p>
       </pre>
-      <button>History</button>
+      <Summary :user="user"></Summary>
       <button>Delete Account</button>
     </div>
   </div>
@@ -26,8 +26,13 @@
 // Composition API
 import { useAuth0 } from '@auth0/auth0-vue';
 import axios from 'axios'
+import Summary from '../Summary/Summary.vue';
+import { useStore } from 'vuex';
 
 export default {
+  components: {
+    Summary
+  },
   setup() {
     const auth0 = useAuth0();
 
@@ -39,6 +44,8 @@ export default {
     };
   },
   data() {
+    const store = useStore();
+    store.commit('setUser', this.$auth0.user);
     return {
       user: this.$auth0.user,
       isAuthenticated: this.$auth0.isAuthenticated,

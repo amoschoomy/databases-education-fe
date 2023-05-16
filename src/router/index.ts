@@ -39,6 +39,12 @@ const routes = [
     props: (route: { query: { data: any } }) => ({
       result: route.query.data,
     }),
+    
+  },
+  {
+    path: '/history',
+    name: 'history',
+    component: History,
   },
 ];
 

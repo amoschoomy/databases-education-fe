@@ -3,7 +3,6 @@ import { VApp, VAppBar, VAppBarNavIcon, VToolbarTitle, VBtn, VIcon } from 'vueti
 import SearchBar from './components/SearchBar/SearchBar.vue'
 import UploadMP3 from './components/UploadMP3/UploadMP3.vue'
 import Login from './components/Login/Login.vue'
-import Logout from './components/Logout/Logout.vue'
 </script>
 
 <template>
