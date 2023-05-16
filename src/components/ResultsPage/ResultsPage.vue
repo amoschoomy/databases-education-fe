@@ -1,18 +1,25 @@
 <template>
   <div>
-    <h1>Summary</h1>
-    <div v-text="resultData"></div>
+  <h1>Summary</h1>
+  <div v-text="resultData"></div>
   </div>
-</template>
-
-<script lang="ts">
-import { defineComponent } from 'vue';
-
-export default defineComponent({
+ </template>
+ 
+ <style scoped>
+ * {
+  color: black;
+ }
+ </style>
+ 
+ <script lang="ts">
+ import { defineComponent } from 'vue';
+ 
+ export default defineComponent({
   data() {
-    return {
-      resultData: this.$route.query.jsonResponse,
-    };
+  return {
+  resultData: this.$route.query.jsonResponse,
+  };
   },
-});
-</script>
+ });
+ </script>
+ 
