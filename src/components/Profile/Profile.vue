@@ -12,16 +12,12 @@
         <p>UID: {{ user.sub }}</p>
       </pre>
       <Summary :user="user"></Summary>
+      <button @click="groupDocsByYear">Show Summary by Year</button>
       <button>Delete Account</button>
     </div>
   </div>
 </template>
 
-<style scoped>
-.profile {
-  color: black;
-}
-</style>
 <script lang="ts">
 // Composition API
 import { useAuth0 } from '@auth0/auth0-vue';
@@ -55,8 +51,7 @@ export default {
   methods: {
     login() {
       this.$auth0.loginWithRedirect();
-    }
-    ,
+    },
     async deleteAccount() {
       // call the endpoint to delete the account from the database
       try {
@@ -67,7 +62,23 @@ export default {
       } catch (error) {
         // handle error
       }
+    },
+    async groupDocsByYear() {
+      try {
+        alert("clicked");
+        const response = await axios.post('http://localhost:3000/group-docs-by-year', { uid: this.user.sub }); // replace with your actual endpoint
+        const docsByYear = response.data;
+        alert(JSON.stringify(docsByYear, null, 2)); // display the data in a popup
+      } catch (error) {
+        console.error('Error fetching docs by year:', error);
+      }
     }
   }
 };
 </script>
+
+<style scoped>
+.profile {
+  color: black;
+}
+</style>
