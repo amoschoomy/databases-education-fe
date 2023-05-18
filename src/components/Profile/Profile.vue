@@ -54,7 +54,6 @@ export default {
 
     async groupDocsByYear() {
       try {
-        alert("clicked");
         const response = await axios.post('http://localhost:3000/group-docs-by-year', { uid: this.user.sub }); // replace with your actual endpoint
         const docsByYear = response.data;
         alert(JSON.stringify(docsByYear, null, 2)); // display the data in a popup

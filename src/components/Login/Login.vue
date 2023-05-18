@@ -22,7 +22,7 @@
     setup() {
         const store = useStore();
 
-      const { isAuthenticated, loginWithRedirect, user } = useAuth0();
+      const { isAuthenticated, loginWithRedirect, user,  } = useAuth0();
       console.log(isAuthenticated.value);
   
       // Watch for changes to isAuthenticated property
