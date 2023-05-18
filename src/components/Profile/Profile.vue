@@ -12,8 +12,7 @@
         <p>UID: {{ user.sub }}</p>
       </pre>
       <Summary :user="user"></Summary>
-      <button @click="groupDocsByYear">Show Summary by Year</button>
-      <button>Delete Account</button>
+      <button @click="groupDocsByYear">Count Document by Year</button>
     </div>
   </div>
 </template>
@@ -52,17 +51,7 @@ export default {
     login() {
       this.$auth0.loginWithRedirect();
     },
-    async deleteAccount() {
-      // call the endpoint to delete the account from the database
-      try {
-        const response = await axios.delete('/api/deleteAccount', { data: { userId: this.user.sub } });
-        if (response.status === 200) {
-          // handle successful deletion
-        }
-      } catch (error) {
-        // handle error
-      }
-    },
+
     async groupDocsByYear() {
       try {
         alert("clicked");

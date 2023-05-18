@@ -3,7 +3,7 @@
     <h1>History of Summaries (Total: {{ summaryCount }})</h1>
     <div class="grid-container">
       <div v-for="(summary, index) in summaries" :key="summary.content_id" class="grid-item"
-        @click="toggleSelectedSummary(index)">
+        @click="toggleSelectedSummary(index)" @contextmenu.prevent="holdToDelete(summary.content_id)">
         <h2>{{ summary.title }}</h2>
         <p>Content ID: {{ summary.content_id }}</p>
         <p>{{ summary.summary }}</p>
@@ -35,7 +35,6 @@ export default {
     let userSub = ref(null);
     let summaries = ref([] as Summary[]);
     let summaryCount = ref(0);
-    let selectedSummary = ref<Summary | null>(null);
 
     const fetchSummaries = async () => {
       if (!userSub.value) return;
@@ -58,6 +57,19 @@ export default {
         console.log('Summary count:', summaryCount.value);
       } catch (error) {
         console.error('Error fetching summary count:', error);
+      }
+    };
+    const holdToDelete = async (index: number) => {
+      const confirmation = confirm('Do you want to delete this item?');
+      if (confirmation) {
+        // Perform the deletion logic here.
+        console.log(index);
+        await axios.delete(`http://localhost:3000/delete-content?content_id=${index}`);
+        // Update the summaries array by filtering out the deleted summary
+        summaries.value = summaries.value.filter((summary) => summary.content_id !== index);
+
+        // Update the summary count
+        summaryCount.value -= 1;
       }
     };
 
@@ -107,6 +119,9 @@ export default {
       updateSummary,
       selectedSummaryIndex,
       editingSummary,
+      holdToDelete,
+
+
     };
 
   },
